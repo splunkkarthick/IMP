@@ -1,0 +1,27 @@
+1. Splunk stores time in UTC always
+
+👉 2. GUI timezone = display only (IST / Paris)
+
+👉 3. Indexer location (like Paris) does NOT matter
+
+👉 4. _time = event time | _indextime = received time
+
+👉 5. Big difference = timezone issue 🚨
+
+👉 6. Log with timezone (+05:30 / -05:00) → OK ✅
+
+👉 7. Log without timezone → Problem ❌
+
+👉 8. Fix using:
+
+TZ = America/New_York
+
+👉 9. Rule: Source TZ → Convert UTC → Display in GUI
+
+👉 10. Golden line:
+👉 “No timezone = wrong time = fix with TZ”
+
+
+“Splunk stores data in UTC. If logs don’t contain timezone, we define it using TZ in props.conf to ensure correct event time parsing.
+
+Displayed time = UTC + your timezone

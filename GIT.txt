@@ -1,0 +1,122 @@
+👉 CI/CD in Splunk = Automatically test and deploy Splunk apps, configs, and use cases across environments without manual effort
+
+GIT version
+
+CI (Continuous Integration) → Automatically add & test changes
+CD (Continuous Deployment/Delivery) → Automatically deploy changes to environments
+
+
+Manual part (YOU do once):
+
+Create alert / config
+Save in Splunk app
+Push to Git
+
+👉 Automation part (SYSTEM does automatically):
+
+Testing
+Packaging
+Deployment
+Restart / reload
+
+
+
+Without CI/CD (Fully Manual ❌)
+
+Every time you make change:
+
+Create config
+Copy file to server manually
+Login to Splunk server
+Paste in /opt/splunk/etc/apps/
+Restart Splunk
+Check errors
+
+👉 Repeat this every time 😓
+
+
+
+With CI/CD ✅
+
+Push code to Git
+Auto test (CI)
+Auto deploy to test → staging → prod (CD)
+Auto validation
+Safe release
+
+
+🔹 Why CI/CD is important for Splunk Admin
+
+✅ No manual mistakes
+✅ Faster deployments
+✅ Easy rollback
+✅ Standard process
+✅ Useful for large environments (SOC / SIEM)
+
+
+👉 Git = a tool used to store, track, and manage changes in your code/files
+👉 Repo = a folder where your code/files are stored and managed
+
+👉 Version tracking = saving your work step by step so you can go back anytime
+👉 Change history = track changes
+👉 Collaboration = team working together safely
+
+
+one
+
+🔹 First: Simple Idea
+
+👉 Each repo = separate folder/project
+
+So:
+
+Repo 1 = Alerts
+Repo 2 = Dashboards
+Repo 3 = Parsing
+
+👉 You push only to the repo you are working on
+
+🔹 Real Example (Very Clear)
+🟢 Repo 1 → splunk-alerts
+
+Contains:
+
+savedsearches.conf
+🟢 Repo 2 → splunk-dashboards
+
+Contains:
+
+dashboard.xml
+🔹 Now Your Work Scenario
+
+👉 You are working on alert only
+
+🟢 Step 1: Go to that repo (folder)
+cd splunk-alerts
+
+👉 Now you are inside alerts repo only
+
+🟢 Step 2: Make change
+[Failed Login Alert]
+search = index=auth action=failure | stats count by user
+🟢 Step 3: Push
+git add .
+git commit -m "Updated alert"
+git push
+🔹 Important Point 🔥
+
+👉 This push goes ONLY to:
+
+✔ splunk-alerts repo
+❌ Not dashboards repo
+❌ Not parsing repo
+
+Because:
+👉 You are inside that repo folder
+
+git is local repository
+github remote repo
+
+git version control of software in which we have our code in common place
+
+github is a server or service we host configurations and app ,usecases 
